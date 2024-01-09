@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->string('phone_number');
-            $table->string('street_address');
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('street');
             $table->string('city');
             $table->string('state');
-            $table->string('zip_code');
-            // $table->string('country');
-            // $table->timestamps();
+            $table->string('country');
+            $table->string('postal_code');
+            $table->timestamps();
         });
     }
 

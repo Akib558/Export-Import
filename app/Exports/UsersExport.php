@@ -9,9 +9,10 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class UsersExport implements FromCollection, ShouldAutoSize, WithMapping
+class UsersExport implements FromCollection, ShouldAutoSize, WithMapping, WithHeadings
 {
     use Exportable;
     private $fileName = "user.xlsx";
@@ -40,6 +41,18 @@ class UsersExport implements FromCollection, ShouldAutoSize, WithMapping
             'email' => $user->email,
             'address' => $user->addresses->isNotEmpty() ? $user->addresses->first()->street_address : null,
             'zip_code' => $user->addresses->isNotEmpty() ? $user->addresses->first()->zip_code : null,
+        ];
+    }
+
+    public function headings(): array
+    {
+        return [
+            'ID',
+            'Name',
+            'Email',
+            'Address',
+            'Zip Code'
+
         ];
     }
 }
