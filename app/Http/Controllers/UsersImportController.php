@@ -16,15 +16,15 @@ class UsersImportController extends Controller
 
     public function import(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:xlsx,csv,txt' // Validation for file type
-        ]);
+        // $request->validate([
+        //     'file' => 'required|mimes:xlsx,csv,txt' // Validation for file type
+        // ]);
 
-        // Handle file import
-        $file = $request->file('file');
+        // // Handle file import
+        // $file = $request->file('file');
 
-        Excel::import(new UsersImportDummy(), $file);
+        // Excel::import(new UsersImportDummy(), $file);
 
-        return redirect()->back()->with('success', 'Data imported successfully!');
+        // return redirect()->back()->with('success', 'Data imported successfully!');
     }
 }

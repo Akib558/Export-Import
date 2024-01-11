@@ -2,8 +2,10 @@
 
 namespace App\Imports;
 
-use App\Models\usersimport;
+// use App\Imports\UsersImport as ImportsUsersImport;
+use App\Models\UsersImportDummy as UIDummy;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class UsersImportDummy implements ToModel
 {
@@ -14,10 +16,17 @@ class UsersImportDummy implements ToModel
      */
     public function model(array $row)
     {
-        return new UsersImportDummy([
-            'user_id' => $row[0],
-            'username' => $row[1],
-            'email' => $row[2]
-        ]);
+        if (isset($row[1]) && isset($row[2]) && isset($row[3])) {
+            return new UsersImport([
+                'first_name' => $row[1],
+                'last_name' => $row[2],
+                'email' => $row[3],
+                // Add other fields as needed
+            ]);
+        }
+
+        // Handle the case where 'first_name' is not present in the Excel row
+        // You might want to log an error or handle it based on your application logic
+        return null;
     }
 }
