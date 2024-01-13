@@ -25,10 +25,6 @@ Route::get('/', function () {
 
 
 Route::get('/users/export', [UsersExportController::class, 'export']);
-// Route::get('/users/export', [ExportController::class, 'export']);
 
 Route::get('/users/import', [UsersImportController2::class, 'show']);
 Route::post('/users/import', [UsersImportController2::class, 'store']);
-
-// Route::get('/users/import', [UsersImportDummyController::class, 'show']);
-// Route::post('/users/import', [UsersImportDummyController::class, 'import']);
