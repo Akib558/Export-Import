@@ -26,12 +26,15 @@ class UsersExport implements FromCollection, ShouldAutoSize, WithMapping //, Wit
     //         ['akib', 'akib@example.com']
     //     ];
     // }
-    public function collection()
+    public function collection(): array
     {
         $user = User::with('address', 'education')->get();
         // dd($user);
         return $user;
     }
+
+
+
 
     public function map($user): array
     {

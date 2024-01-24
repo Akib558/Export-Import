@@ -4,6 +4,8 @@ namespace App\Imports;
 
 use App\Models\User;
 use App\Models\UsersImportDummy;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -11,6 +13,7 @@ use Throwable;
 
 class UsersImport2 implements ToModel, WithHeadingRow, SkipsOnError
 {
+    use SkipsErrors, Importable, SkipsErrors;
     /**
      * @param array $row
      *
@@ -19,6 +22,7 @@ class UsersImport2 implements ToModel, WithHeadingRow, SkipsOnError
     public function model(array $row)
     {
         // dd($row);
+
         if (isset($row['email'])) {
             return new UsersImportDummy([
                 'id' => $row['id'],
