@@ -11,9 +11,9 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Throwable;
 
-class UsersImport2 implements ToModel, WithHeadingRow, SkipsOnError
+class UsersImport2 implements ToModel, WithHeadingRow
 {
-    use SkipsErrors, Importable, SkipsErrors;
+    use Importable;
     /**
      * @param array $row
      *
@@ -24,6 +24,7 @@ class UsersImport2 implements ToModel, WithHeadingRow, SkipsOnError
         // dd($row);
 
         if (isset($row['email'])) {
+
             return new UsersImportDummy([
                 'id' => $row['id'],
                 'first_name' => $row['first_name'],
@@ -33,8 +34,10 @@ class UsersImport2 implements ToModel, WithHeadingRow, SkipsOnError
         }
         return null;
     }
-
-    public function onError(Throwable $e)
+    public function rules(): array
     {
+        return [
+            '*.email' => ['email', 'unique:user,email']
+        ];
     }
 }

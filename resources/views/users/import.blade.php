@@ -52,6 +52,52 @@
             </form>
         </div>
 
+        <div class="card-body">
+            @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
+            @endif
+
+            @if (isset($errors) && $errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                {{ $error }}
+                @endforeach
+            </div>
+            @endif
+
+            {{-- @if (session()->has('failures')) --}}
+            {{----}}
+            {{-- <table class="table table-danger"> --}}
+            {{-- <tr> --}}
+            {{-- <th>Row</th> --}}
+            {{-- <th>Attribute</th> --}}
+            {{-- <th>Errors</th> --}}
+            {{-- <th>Value</th> --}}
+            {{-- </tr> --}}
+            {{----}}
+            {{-- @foreach (session()->get('failures') as $validation) --}}
+            {{-- <tr> --}}
+            {{-- <td>{{ $validation->row() }}</td> --}}
+            {{-- <td>{{ $validation->attribute() }}</td> --}}
+            {{-- <td> --}}
+            {{-- <ul> --}}
+            {{-- @foreach ($validation->errors() as $e) --}}
+            {{-- <li>{{ $e }}</li> --}}
+            {{-- @endforeach --}}
+            {{-- </ul> --}}
+            {{-- </td> --}}
+            {{-- <td> --}}
+            {{-- {{ $validation->values()[$validation->attribute()] }} --}}
+            {{-- </td> --}}
+            {{-- </tr> --}}
+            {{-- @endforeach --}}
+            {{-- </table> --}}
+            {{----}}
+            {{-- @endif --}}
+
+        </div>
         <div>Hello world for testing </div>
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8">
             <h2 class="text-xl font-semibold mb-4">Export Data</h2>

@@ -4,11 +4,13 @@ namespace App\Imports;
 
 // use App\Imports\UsersImport as ImportsUsersImport;
 use App\Models\UsersImportDummy as UIDummy;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class UsersImportDummy implements ToModel
 {
+    use Importable;
     /**
      * @param array $row
      *
@@ -17,7 +19,7 @@ class UsersImportDummy implements ToModel
     public function model(array $row)
     {
         if (isset($row[1]) && isset($row[2]) && isset($row[3])) {
-            return new UsersImport([
+            return new UsersImportDummy([
                 'first_name' => $row[1],
                 'last_name' => $row[2],
                 'email' => $row[3],

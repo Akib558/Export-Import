@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\UsersImport;
 use App\Imports\UsersImport2;
+use App\Models\UsersImportDummy;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -19,8 +20,10 @@ class UsersImportController2 extends Controller
         //Excel::import(new UsersImport2, $file);
         $import = new UsersImport2;
         $import->import($file);
+        // dd($import->errors());
+        // dd($file);
 
-        dd($import->errors());
+        // dd($import->errors());
 
         return back()->with('status', 'Excel file imported Successfully');
     }
